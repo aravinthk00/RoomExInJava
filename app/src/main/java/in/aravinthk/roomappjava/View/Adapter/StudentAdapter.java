@@ -1,12 +1,15 @@
 package in.aravinthk.roomappjava.View.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -19,7 +22,10 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
     Context context;
     List<Student> studentList;
 
+    StudentItemClickListener itemClickListener;
+
     public StudentAdapter(Context context, List<Student> studentList) {
+        this.context = context;
         this.studentList = studentList;
     }
 
@@ -32,10 +38,21 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
 
     @Override
     public void onBindViewHolder(@NonNull StudentViewHolder holder, int position) {
-
-        holder.rollNo.setText(studentList.get(position).getRollNo());
+        for (Student s: studentList){
+            Log.d("TAG", "onBindViewHolder: " + s.getRollNo());
+        }
+        Log.d("TAG", "onBindViewHolder: "+ studentList.get(position).getRollNo());
+        holder.rollNo.setText(String.valueOf(studentList.get(position).getRollNo()));
         holder.studentName.setText(studentList.get(position).getStudentName());
-        holder.studentClass.setText(studentList.get(position).getStudentClass());
+        holder.studentClass.setText(String.valueOf(studentList.get(position).getStudentClass()));
+
+        holder.mainContainer.setOnClickListener(view -> itemClickListener.studentItemClicked(position));
+
+        holder.updateCompatButton.setOnClickListener(view -> itemClickListener.studentUpdateItemClick(position));
+
+        holder.deleteCompatButton.setOnClickListener(view -> itemClickListener.studentDeleteItemClick(position));
+
+
     }
 
     @Override
@@ -48,6 +65,8 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
         TextView rollNo;
         TextView studentName;
         TextView studentClass;
+        ConstraintLayout updateButtonLayout, deleteButtonLayout, mainContainer;
+        AppCompatImageButton updateCompatButton, deleteCompatButton;
 
         public StudentViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -55,7 +74,20 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
             rollNo = itemView.findViewById(R.id.rollNumberText);
             studentName = itemView.findViewById(R.id.studentNameText);
             studentClass = itemView.findViewById(R.id.studentClassText);
+            mainContainer = itemView.findViewById(R.id.mainContainer);
+            updateButtonLayout = itemView.findViewById(R.id.updateButtonConstrainLayout);
+            deleteButtonLayout = itemView.findViewById(R.id.deleteButtonConstrainLayout);
+            updateCompatButton = itemView.findViewById(R.id.itemUpdateButton);
+            deleteCompatButton = itemView.findViewById(R.id.itemDeleteButton);
 
         }
+    }
+
+    public interface StudentItemClickListener{
+        void studentItemClicked(int position);
+
+        void studentUpdateItemClick(int position);
+
+        void studentDeleteItemClick(int positon);
     }
 }

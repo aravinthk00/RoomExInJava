@@ -1,7 +1,6 @@
 package in.aravinthk.roomappjava.View;
 
 
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,16 +11,23 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import in.aravinthk.roomappjava.DataBase.Student;
 import in.aravinthk.roomappjava.R;
+import in.aravinthk.roomappjava.View.Adapter.StudentAdapter;
+import in.aravinthk.roomappjava.ViewModel.StudentViewModel;
 import in.aravinthk.roomappjava.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String TAG = "MainActivity";
     ActivityMainBinding mainBinding;
-
     Context context;
 
 
@@ -32,31 +38,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(mainBinding.getRoot());
 
         context = getApplicationContext();
-        mainBinding.fab.setOnClickListener( view -> {
-            showDialog();
-        });
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        StudentFragment studentFragment = new StudentFragment();
+        transaction.add(mainBinding.fragmentConatiner.getId(),studentFragment,StudentFragment.TAG);
+        transaction.addToBackStack(StudentFragment.TAG);
+        transaction.commit();
     }
 
-    private void showDialog() {
-
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = this.getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.add_student_dialog_layout, null);
-        dialogBuilder.setView(dialogView);
-
-        TextInputEditText student_roll_no_edit = (TextInputEditText) dialogView.findViewById(R.id.rollNumberEdit);
-        TextInputEditText student_name_edit = (TextInputEditText) dialogView.findViewById(R.id.studentNameEdit);
-        TextInputEditText student_class_edit = (TextInputEditText) dialogView.findViewById(R.id.studentClassEdit);
-
-        Button add_student_button = (Button) dialogView.findViewById(R.id.studentAddButton);
-
-        add_student_button.setOnClickListener(view -> {
-            Log.d("TAG", "showDialog: ");
-        });
-
-        dialogBuilder.create();
-        dialogBuilder.show();
-
-
-    }
 }

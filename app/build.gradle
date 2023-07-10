@@ -49,4 +49,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata:2.6.1"
     implementation "androidx.lifecycle:lifecycle-common-java8:2.6.1"
 
+    configurations.implementation {
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
+    }
+
 }

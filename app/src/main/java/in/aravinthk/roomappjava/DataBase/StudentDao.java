@@ -15,16 +15,16 @@ public interface StudentDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertStudent(Student studentData);
 
-    @Update
-    void updateStudent(Student studentData);
-
-    @Query("SELECT * FROM STUDENT_TABLE")
-    void getStudentData();
+//    @Update
+//    void updateStudent(Student studentData);
+//
+//    @Query("SELECT * FROM STUDENT_TABLE")
+//    //void getStudentData();
 
     @Query("SELECT * FROM STUDENT_TABLE ORDER BY Roll_No ASC")
     LiveData<List<Student>> getStudentDataOrder();
 
-    @Query("DELETE FROM STUDENT_TABLE")
-    void deleteAll();
+//    @Query("DELETE FROM STUDENT_TABLE")
+//    void deleteAll();
 
 }

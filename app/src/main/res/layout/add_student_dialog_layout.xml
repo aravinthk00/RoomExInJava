@@ -7,29 +7,30 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/dialogContainer"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent="0.8"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintWidth_percent="0.8">
 
         <TextView
             android:id="@+id/dialogHeadText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:background="@color/LightSlateGray"
             android:text="Add Student Details"
             android:textAlignment="center"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/contentContainer"
+            android:id="@+id/editingContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dialogHeadText">
 
@@ -37,17 +38,17 @@
                 android:id="@+id/rollNumberEditLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_margin="10dp">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/rollNumberEdit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Student Roll Number"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:hint="Student Roll Number"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -55,17 +56,17 @@
                 android:id="@+id/studentNameEditLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rollNumberEditLayout"
-                android:layout_margin="10dp">
+                app:layout_constraintTop_toBottomOf="@id/rollNumberEditLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/studentNameEdit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Student Name"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:hint="Student Name"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -74,17 +75,17 @@
                 android:id="@+id/studentClassEditLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/studentNameEditLayout"
-                android:layout_margin="10dp">
+                app:layout_constraintTop_toBottomOf="@id/studentNameEditLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/studentClassEdit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Student Class"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:hint="Student Class"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -92,13 +93,107 @@
                 android:id="@+id/studentAddButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/studentClassEditLayout"
-                android:text="ADD NEW STUDENT"
                 android:layout_margin="20dp"
-                android:textAlignment="center"/>
+                android:text="ADD NEW STUDENT"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/studentClassEditLayout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/viewContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dialogHeadText">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/leftViewDialogContainer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.5">
+
+                <TextView
+                    android:id="@+id/rollNumberDialogTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="RollNumber"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="22dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/studentNameDialogTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Student Name "
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="22dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rollNumberDialogTextView" />
+
+                <TextView
+                    android:id="@+id/studentClassDialogTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Student Class  "
+                    android:textSize="22dp"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/studentNameDialogTextView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/rightDataDialogContainer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/leftViewDialogContainer"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.5">
+
+                <TextView
+                    android:id="@+id/rollNumberDialogText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="RollNumber"
+                    android:textSize="22dp"
+                    android:textColor="@color/OrangeRed"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/studentNameDialogText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Student Name"
+                    android:textSize="22dp"
+                    android:textColor="@color/DarkKhaki"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/rollNumberDialogText"
+                    app:layout_constraintTop_toBottomOf="@id/rollNumberDialogText" />
+
+                <TextView
+                    android:id="@+id/studentClassDialogText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Student Class"
+                    android:textSize="22dp"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/studentNameDialogText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
