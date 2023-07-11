@@ -19,14 +19,16 @@ import in.aravinthk.roomappjava.R;
 
 public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentViewHolder> {
 
+    public static final String TAG = "StudentAdapter";
     Context context;
     List<Student> studentList;
 
     StudentItemClickListener itemClickListener;
 
-    public StudentAdapter(Context context, List<Student> studentList) {
+    public StudentAdapter(Context context, List<Student> studentList, StudentItemClickListener itemClickListener) {
         this.context = context;
         this.studentList = studentList;
+        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -46,7 +48,13 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
         holder.studentName.setText(studentList.get(position).getStudentName());
         holder.studentClass.setText(String.valueOf(studentList.get(position).getStudentClass()));
 
-        holder.mainContainer.setOnClickListener(view -> itemClickListener.studentItemClicked(position));
+        holder.mainContainer.setOnClickListener(view -> {
+            try {
+                itemClickListener.studentItemClicked(position);
+            } catch (NullPointerException e){
+                Log.d(TAG, "studentItemClicked: NullPointerException " + e);
+            }
+        });
 
         holder.updateCompatButton.setOnClickListener(view -> itemClickListener.studentUpdateItemClick(position));
 

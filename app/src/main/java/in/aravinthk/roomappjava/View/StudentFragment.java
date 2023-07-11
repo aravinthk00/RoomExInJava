@@ -77,7 +77,7 @@ public class StudentFragment extends Fragment implements StudentAdapter.StudentI
                         for (Student s : studentList) {
                             Log.d("TAG", "getData: " + s.getRollNo());
                         }
-                        studentAdapter = new StudentAdapter(context, studentList );
+                        studentAdapter = new StudentAdapter(context, studentList, this );
                         binding.recyclerview.setAdapter(studentAdapter);
                         studentAdapter.notifyDataSetChanged();
                     }
@@ -145,11 +145,12 @@ public class StudentFragment extends Fragment implements StudentAdapter.StudentI
 
             //getData();
 
-            dialogStudentNameText.setText(studentDataList.get(position).getStudentName());
-            dialogStudentRollText.setText(studentDataList.get(position).getRollNo());
-            dialogStudentClassText.setText(studentDataList.get(position).getStudentClass());
-
         });
+
+        Log.d(TAG, "showDialog: "+ studentDataList.get(position).getStudentName());
+        dialogStudentNameText.setText(studentDataList.get(position).getStudentName());
+        dialogStudentRollText.setText(String.valueOf(studentDataList.get(position).getRollNo()));
+        dialogStudentClassText.setText(String.valueOf(studentDataList.get(position).getStudentClass()));
 
         dialogBuilder.create();
         dialogBuilder.show();
