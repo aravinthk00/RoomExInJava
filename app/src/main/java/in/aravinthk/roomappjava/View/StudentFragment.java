@@ -35,8 +35,6 @@ public class StudentFragment extends Fragment implements StudentAdapter.StudentI
     Context context;
     StudentViewModel studentViewModel;
     StudentAdapter studentAdapter;
-    StudentAdapter.StudentItemClickListener itemClickListener;
-
     List<Student> studentDataList = new ArrayList<>();
 
     @Override
